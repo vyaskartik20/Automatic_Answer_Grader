@@ -46,7 +46,7 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
                     # 127, 255, cv2.THRESH_BINARY)
     img = cv2.blur(img,(20,20))
 
-    cv2.imwrite("Image_bin.jpg",img_bin)
+    cv2.imwrite("Methodology/Image_bin.jpg",img_bin)
 
     # Defining a kernel length
     kernel_length = np.array(img).shape[1]//400
@@ -61,12 +61,12 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
     # Morphological operation to detect verticle lines from an image
     img_temp1 = cv2.erode(img_bin, verticle_kernel, iterations=3)
     verticle_lines_img = cv2.dilate(img_temp1, verticle_kernel, iterations=3)
-    cv2.imwrite("verticle_lines.jpg",verticle_lines_img)
+    cv2.imwrite("Methodology/verticle_lines.jpg",verticle_lines_img)
 
     # Morphological operation to detect horizontal lines from an image
     img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=3)
     horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=3)
-    cv2.imwrite("horizontal_lines.jpg",horizontal_lines_img)
+    cv2.imwrite("Methodology/horizontal_lines.jpg",horizontal_lines_img)
 
     # Weighting parameters, this will decide the quantity of an image to be added to make a new image.
     alpha = 0.50
@@ -78,7 +78,7 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
     # For Debugging
     # Enable this line to see verticle and horizontal lines in the image which is used to find boxes
-    cv2.imwrite("img_final_bin.jpg",img_final_bin)
+    cv2.imwrite("Methodology/img_final_bin.jpg",img_final_bin)
     # Find contours for image, which will detect all the boxes
     contours, hierarchy = cv2.findContours(
         img_final_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
@@ -290,18 +290,26 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
     # cv2.imwrite("./Temp/img_contour.jpg", img)
 
 #
-dirname = "test13"
+dirname = "test15"
 os.mkdir(dirname)
 
-for j in range(1, 68):
-    dirname =("test13/Cropped"+ str(j))
+for j in range(1, 15):
+    dirname =("test15/Cropped"+ str(j))
     os.mkdir(dirname)
 
+dirname = "result"
+os.mkdir(dirname)
 
+for j in range(1, 15):
+    dirname =("result/resultt"+ str(j))
+    os.mkdir(dirname)
 
-for j in range(1,68):
-    if((j!=26)and(j!=48)):
-        box_extraction("data/image_"+str(j)+".jpg", "./test13/Cropped"+str(j)+"/")
+# box_extraction("set/image_"+".jpg", "")
+
+for j in range(1,15):
+    # if((j!=26)and(j!=48)):
+    box_extraction("set/image_"+str(j)+".jpg", "./test15/Cropped"+str(j)+"/")
+
 
 
 # box_extraction("image_312.jpg", "./Cropped/")

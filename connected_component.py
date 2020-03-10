@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
-for j in range(1, 3):
+for j in range(1, 15):
+	# if((j!=4)and(j!=9)and(j!=11)):
 	#inputs = cv2.imread("resultt/resultttt_" + str(j) + ".jpg",0)
-	inputs = cv2.imread("result/resultttt_" + str(j) + ".png",0)
+	inputs = cv2.imread("result/resultt" + str(j) + "/result.png",0)
 	#inputs = cv2.imread("result.png",0)
 	kernel3 = np.ones((5,5),np.uint8)
 	erosion3 = cv2.erode(inputs,kernel3,iterations = 3)

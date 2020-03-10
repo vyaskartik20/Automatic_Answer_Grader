@@ -3,11 +3,13 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 from PIL import Image
-
-for i in range(1, 3):
+# ./test13/Cropped
+for i in range(1, 15):
 	# Open the image files.
 	#im = cv2.imread("data_sets/test_" + str(i) + ".jpg")
-	im = cv2.imread("data_set/test_" + str(i) + ".png")
+	# if((i!=4)and(i!=9)and(i!=11)):
+	im = cv2.imread("test15/Cropped" + str(i) + "/1.png")
+	# imwr
 
 	#im = cv2.imread('result_edited/result_edited_1.jpg')
 	#cv2.imshow('image',im)
@@ -33,12 +35,12 @@ for i in range(1, 3):
 	#img1_color = cv2.imread("data_sets/real_test_" + str(i) + ".jpg")  # Image to be aligned.
 	#img2_color = cv2.imread("data_sets/example.jpg")
 
-	img2_color = cv2.imread("data_set/example.png")    # Reference image.
+	img2_color = cv2.imread("answer.png")    # Reference image.
 
 
-	cv2.imshow('image',img1_color)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow('image',img1_color)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
 
 	#extra
 	# row,col=img2_color.shape[:2]
@@ -91,8 +93,8 @@ for i in range(1, 3):
 
 	matches.sort(key = lambda x: x.distance)
 	#extra
-	img3 = cv2.drawMatches(img1_color,kp1,img2_color,kp2,matches[:10],None,flags=2)
-	plt.imshow(img3),plt.show()
+	# img3 = cv2.drawMatches(img1_color,kp1,img2_color,kp2,matches[:10],None,flags=2)
+	# plt.imshow(img3),plt.show()
 	# Take the top 90 % matches forward.
 	matches = matches[:int(len(matches)*90)]
 	no_of_matches = len(matches)
@@ -115,11 +117,11 @@ for i in range(1, 3):
 
 	# Save the output.
 	#cv2.imwrite('outputad/output_' + str(i) + '.jpg', transformed_img)
-	cv2.imwrite('outputads/output_' + str(i) + '.png',transformed_img)
+	# cv2.imwrite('outputads/output_' + str(i) + '.png',transformed_img)
 #image registration done
 
 	#img2 = cv2.imread("data_sets/example.jpg")
-	img2 = cv2.imread("data_set/example.png")
+	img2 = cv2.imread("answer.png")
 	img2 = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
 	#img1 = cv2.imread("outputad/output_" + str(i) + ".jpg")
 	img1 = cv2.cvtColor(transformed_img,cv2.COLOR_BGR2GRAY)
@@ -148,4 +150,8 @@ for i in range(1, 3):
 	# dirname="resultt"
 	# os.mkdir(dirname)
 	#cv2.imwrite("resultt/resultttt_" + str(i) + ".jpg", dilation3)
-	cv2.imwrite("result/resultttt_" + str(i) + ".png", dilation3)
+
+
+
+
+	cv2.imwrite("result/resultt" + str(i) + "/result"+".png", dilation3)
