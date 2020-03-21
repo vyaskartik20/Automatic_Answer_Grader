@@ -29,7 +29,7 @@ def sort_contours(cnts, method="left-to-right"):
     # return the list of sorted contours and bounding boxes
     return (cnts, boundingBoxes)
 
-def box_extractionqw(img_for_box_extraction_path, cropped_dir_path):
+def box_extractionqw(img_for_box_extraction_path):
 
     img = cv2.imread(img_for_box_extraction_path, 0)  # Read the image
     img2 = cv2.imread(img_for_box_extraction_path, 0)
@@ -108,22 +108,7 @@ def box_extractionqw(img_for_box_extraction_path, cropped_dir_path):
                     if ((x<(x1+50))): #inner
                         idx += 1
 
-                        # rect = cv2.minAreaRect(c)
-                        # box = cv2.boxPoints(rect)
-                        #
-                        # box = np.int0(box)
-                        # # draw a red 'nghien' rectangle
-                        # cv2.drawContours(img, [box], 0, (0, 0, 255))
-                        # cv2.imwrite("contour1.png", img)
-                        # # finally, get the min enclosing circle
-
-
-                        # hull = cv.c(points[, hull[, clockwise[, returnPoints]]
-                        # hull = cv2.convexHull(c)
-                        # print(hull)
-
-
-
+                        
                         itr=0
 
                         approx = cv2.approxPolyDP(c, 0.009 * cv2.arcLength(c, True), True)
@@ -144,12 +129,7 @@ def box_extractionqw(img_for_box_extraction_path, cropped_dir_path):
                         # String containing the co-ordinates.
                                 string = str(xq) + " " + str(yq)
 
-                        #if(i == 0):
-                        # text on topmost co-ordinate.
-                        # cv2.putText(img2, "Arrow tip", (x, y),
-                        # font, 0.5, (255, 0, 0))
-                        #else:
-                        # text on remaining co-ordinates.
+
                                 cv2.putText(img3, string, (xq, yq),
                                 font, 0.5, (255, 255, 0))
 
@@ -183,166 +163,8 @@ def box_extractionqw(img_for_box_extraction_path, cropped_dir_path):
 
 
                         print (coords)
-                        # print(cv2.contourArea(c))
-                        # extLeft = tuple(c[c[:, :, 0].argmin()][0])
-                        # extRight = tuple(c[c[:, :, 0].argmax()][0])
-                        # extTop = tuple(c[c[:, :, 1].argmin()][0])
-                        # extBot = tuple(c[c[:, :, 1].argmax()][0])
 
-                        # hull = []
-                        #
-                        # # calculate points for each contour
-                        #
-                        # hull.append(cv2.convexHull(c, False))
-                        #
-                        # # create an empty black image
-                        # drawing = np.zeros((thresh.shape[0], thresh.shape[1], 3), np.uint8)
-                        #
-                        # # draw contours and hull points
-                        #
-                        # color_contours = (0, 255, 0) # color for contours
-                        # color = (255, 255, 255) # color for convex hull
-                        # # draw contours
-                        # cv2.drawContours(drawing, contours, i, color_contours, 2, 8, hierarchy)
-                        # # draw convex hull
-                        # cv2.drawContours(drawing, hull, i, color, 2, 8)
-
-
-                        # extTop="(%s, %s)" %(box[1][0],box[1][1])
-                        # extRight="(%s, %s)" %(box[2][0],box[2][1])
-                        # extBot="(%s, %s)" %(box[3][0],box[3][1])
-                        # extLeft="(%s, %s)" %(box[0][0],box[0][1])
-
-                        # extTop="(%s, %s)" %(box[1][0],box[1][1])
-                        # extRight="(%s, %s)" %(box[2][0],box[2][1])
-                        # extBot="(%s, %s)" %(box[3][0],box[3][1])
-                        # extLeft="(%s, %s)" %(box[0][0],box[0][1])
-
-
-                        # coords="[%s, %s, %s, %s]" %(extTop,extRight,extBot,extLeft)
-
-                        # print(coords)
-
-                        pts = np.array(eval(coords), dtype = "float32")
-
-
-                        new_img = four_point_transform(img2,pts)
-                        cv2.imwrite(cropped_dir_path+str(idx) + '.png', new_img)
-                        # print(x)
-
-
-
-                        # box = np.int0(box)
-                        # # draw a red 'nghien' rectangle
-                        # cv2.drawContours(img, [box], 0, (0, 0, 255))
-                        # cv2.imwrite("contour1.png", img)
-                        # coords="[(189.96536, 1084.9089), (822.29297, 1050.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]"
-                        # [(189.96536, 1084.9089), (852.29297, 1006.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]
                         x1=x #inner
-                # print(x)
-                    # y1=y
-                        # x1=x  #outer
-                        # y1=y
-
-                        # print(coords)
-
-                        # img1 = cv2.imread(img_for_box_extraction_path, 0)  # Read the image
-                        # cv2.drawContours(img1,c, -1, (0, 255, 255), 2)
-                        # cv2.circle(img1, (189,1084) , 8, (0, 0, 255), -1)
-                        # cv2.circle(img1, (852,1006) , 8, (0, 255, 0), -1)
-                        # cv2.circle(img1, (990,2167) , 8, (255, 0, 0), -1)
-                        # cv2.circle(img1, (328,2246) , 8, (255, 255, 0), -1)
-                        # cv2.imwrite('new.png', img1)
 
 
-                        # if((extLeft[1])>(extBot[1])):
-                        #     coords="[%s, %s, %s, %s]" %(extLeft,extTop,extRight,extBot)
-                        #
-                        # else:
-                        #     coords="[%s, %s, %s, %s]" %(extTop,extRight,extBot,extLeft)
-
-                        # print (extLeft)
-                        # print ("    ")
-                        # print(extRight)
-                        # print ("    ")
-                        # print (extTop)
-                        # print ("    ")
-                        # print(extBot)
-                        # print ("\n")
-
-                        # box = cv2.boxPoints(c)
-
-                        # coords=(str1+ (extLeft) + str3 + (extTop)+ str3 +(extRight)+ str3 + (extBot)+str2)
-
-
-                        # print(coords)
-
-                        # print (x1)
-                        # print ("    ")
-                        # print(w)
-                        # print ("\n")
-                        # print (h)
-                        # print ("\n")
-
-
-
-
-            # If the box height is greater then 20, widht is >80, then only save it as a box in "cropped/" folder.
-            # if (w > 40 and h > 60) and (w<1000) and (h > 1.5*w):
-
-
-    # For Debugging
-    # Enable this line to see all contours.
-    # cv2.drawContours(img, contours, -1, (0, 0, 255), 3)
-    # cv2.imwrite("./Temp/img_contour.jpg", img)
-
-#
-
-# dirname = "RUN"
-# os.mkdir(dirname)
-#
-dirname = "RUN/test20"
-os.mkdir(dirname)
-# for j in range(1, 68):
-#     dirname =("RUN/test15/Cropped"+ str(j))
-#     os.mkdir(dirname)
-#
-# dirname = "RUN/result"
-# os.mkdir(dirname)
-#
-for j in range(1, 68):
-    dirname =("RUN/test20/"+ str(j)) + "/"
-    os.mkdir(dirname)
-    dirname =("RUN/test20/"+ str(j)) + "/1/"
-    os.mkdir(dirname)
-    dirname =("RUN/test20/"+ str(j)) + "/2/"
-    os.mkdir(dirname)
-#
-# # box_extraction("set/image_"+".jpg", "")
-#
-# dirname = "RUN/answer"
-# os.mkdir(dirname)
-#
-# dirname = "RUN/answer/blank"
-# os.mkdir(dirname)
-#
-# dirname = "RUN/answer/answerkey"
-# os.mkdir(dirname)
-
-# box_extraction("set/image_"+str("0")+".jpg", "./RUN/answer/answerkey/")
-# box_extraction("set/image_"+str("001")+".jpg", "./RUN/answer/blank/")
-
-for j in range(1,68):
-    if((j!=26)and(j!=48)):
-        print(j)
-        box_extractionqw("RUN/test15/Cropped"+str(j)+"/1.png", "./RUN/test20/"+str(j)+"/1/")
-        box_extractionqw("RUN/test15/Cropped"+str(j)+"/2.png", "./RUN/test20/"+str(j)+"/2/")
-    # if(j==1):
-    #     box_extraction("set/image_"+str(j)+".jpg", "./answer/")
-
-
-
-# registration()
-# components()
-
-# box_extraction("image_312.jpg", "./Cropped/")
+box_extractionqw("RUN/test15/Cropped1/1.png")
