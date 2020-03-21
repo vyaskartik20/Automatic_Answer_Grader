@@ -11,6 +11,8 @@ dilation3 = cv2.dilate(erosion3,kernel3,iterations = 3)
 # print(dilation3.shape)
 cropped = dilation3[50:1950, 70:860] # cropping should not be fixed, try it to be automatic kinda?
 # cv2.imwrite("result_edited/cropped_" + str(j) + ".jpg", cropped)
+# cv2.imshow("cropped",inputs)
+# cv2.waitKey(0)
 ret, thresh = cv2.threshold(cropped, 150, 255, cv2.THRESH_BINARY_INV)
 
 img = cv2.bitwise_not(thresh)
