@@ -101,10 +101,11 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
 
             # if ((x==x1)):
-            if (w > 400 and h > 60):
+
             # if(cv2.contourArea(c)>50):
-                # if ((x>(x1+300))): #outer
-                if ((x<(x1+50))): #inner
+            if ((x>(x1+100))): #outer
+                if (w > 400 and h > 600 and h>(1.3*w) ):
+                # if ((x<(x1+50))): #inner
                     idx += 1
 
                     # rect = cv2.minAreaRect(c)
@@ -235,10 +236,10 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
                     # cv2.imwrite("contour1.png", img)
                     # coords="[(189.96536, 1084.9089), (822.29297, 1050.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]"
                     # [(189.96536, 1084.9089), (852.29297, 1006.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]
-                x1=x #inner
+                # x1=x #inner
             # print(x)
                 # y1=y
-                    # x1=x  #outer
+                    x1=x  #outer
                     # y1=y
 
                     # print(coords)
@@ -300,14 +301,14 @@ os.mkdir(dirname)
 
 dirname = "RUN/test15"
 os.mkdir(dirname)
-for j in range(1, 10):
+for j in range(1, 68):
     dirname =("RUN/test15/Cropped"+ str(j))
     os.mkdir(dirname)
 
 dirname = "RUN/result"
 os.mkdir(dirname)
 
-for j in range(1, 10):
+for j in range(1, 68):
     dirname =("RUN/result/resultt"+ str(j))
     os.mkdir(dirname)
 
@@ -322,18 +323,18 @@ os.mkdir(dirname)
 dirname = "RUN/answer/answerkey"
 os.mkdir(dirname)
 
-box_extraction("set/image_"+str("0")+".jpg", "./RUN/answer/answerkey/")
-box_extraction("set/image_"+str("001")+".jpg", "./RUN/answer/blank/")
+# box_extraction("set/image_"+str("0")+".jpg", "./RUN/answer/answerkey/")
+# box_extraction("set/image_"+str("001")+".jpg", "./RUN/answer/blank/")
 
-for j in range(1,10):
-    # if((j!=2)and(j!=4)and(j!=6)and(j!=9)):
+for j in range(1,68):
+    if((j!=26)and(j!=48)):
         box_extraction("set/image_"+str(j)+".jpg", "./RUN/test15/Cropped"+str(j)+"/")
     # if(j==1):
     #     box_extraction("set/image_"+str(j)+".jpg", "./answer/")
 
 
 
-registration()
-components()
+# registration()
+# components()
 
 # box_extraction("image_312.jpg", "./Cropped/")
