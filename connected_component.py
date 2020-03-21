@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 def components():
-	for j in range(1, 10):
+	for j in range(1, 68):
 		# if((j!=2)and(j!=4)and(j!=6)and(j!=9)):
 			# if((j!=4)and(j!=9)and(j!=11)):
 			#inputs = cv2.imread("resultt/resultttt_" + str(j) + ".jpg",0)

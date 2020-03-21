@@ -67,8 +67,8 @@ height, width = img2.shape
 # img3=cv2.drawKeypoints(img1_color,kp1,None,flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 # cv2.imshow("keypoints",img3)
 # cv2.waitKey(0)
-p1=[[14,1161],[658,1159],[653,14],[12,13]]
-p2=[[14,1211],[684,1209],[679,13],[12,13]]
+p1=[(14,1161),(658,1159),(653,14),(12,13)]
+p2=[(14,1211),(684,1209),(679,13),(12,13)]
 # j=0
 # for i in p1:
 #     #x,y=i.ravel()

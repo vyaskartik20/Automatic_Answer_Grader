@@ -6,7 +6,7 @@ from PIL import Image
 # ./test13/Cropped
 
 def registration():
-	for i in range(1, 10):
+	for i in range(1, 68):
 		# if((i!=2)and(i!=4)and(i!=6)and(i!=9)):
 			# Open the image files.
 			#im = cv2.imread("data_sets/test_" + str(i) + ".jpg")
