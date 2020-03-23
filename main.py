@@ -340,8 +340,9 @@ def registration():
             kernel3 = np.ones((5,5),np.uint8)
             erosion3 = cv2.erode(img3,kernel3,iterations = 2)
             dilation3 = cv2.dilate(erosion3,kernel3,iterations = 1)
+            cropped=dilation3[20:int(.98*len(dilation3)),20:int(.98*(len(dilation3[0])))]
             cv2.imwrite("registered/filled/rollno"+str(k)+"/"+str(1)+".png", transformed_img)
-            cv2.imwrite("difference/filled/rollno"+str(k)+"/"+str(1)+".png", dilation3)
+            cv2.imwrite("difference/filled/rollno"+str(k)+"/"+str(1)+".png", cropped)
 
 
             img1_color = cv2.imread("cropped/rollno"+str(k) + "/" +str(2)+ ".png")
@@ -372,8 +373,9 @@ def registration():
             kernel3 = np.ones((5,5),np.uint8)
             erosion3 = cv2.erode(img3,kernel3,iterations = 2)
             dilation3 = cv2.dilate(erosion3,kernel3,iterations = 1)
+            cropped=dilation3[20:int(.98*len(dilation3)),20:int(.98*(len(dilation3[0])))]
             cv2.imwrite("registered/filled/rollno"+str(k)+"/"+str(2)+".png", transformed_img)
-            cv2.imwrite("difference/filled/rollno"+str(k)+"/"+str(2)+".png", dilation3)
+            cv2.imwrite("difference/filled/rollno"+str(k)+"/"+str(2)+".png", cropped)
 
 
 
@@ -406,8 +408,9 @@ def registration():
             kernel3 = np.ones((5,5),np.uint8)
             erosion3 = cv2.erode(img3,kernel3,iterations = 2)
             dilation3 = cv2.dilate(erosion3,kernel3,iterations = 1)
+            cropped=dilation3[20:int(.98*len(dilation3)),20:int(.98*(len(dilation3[0])))]
             cv2.imwrite("registered/empty/rollno"+str(k)+"/"+str(1)+".png", transformed_img)
-            cv2.imwrite("difference/empty/rollno"+str(k)+"/"+str(1)+".png", dilation3)
+            cv2.imwrite("difference/empty/rollno"+str(k)+"/"+str(1)+".png", cropped)
 
 
             img1_color = cv2.imread("cropped/rollno"+str(k) + "/" +str(2)+ ".png")
@@ -438,9 +441,10 @@ def registration():
             kernel3 = np.ones((5,5),np.uint8)
             erosion3 = cv2.erode(img3,kernel3,iterations = 2)
             dilation3 = cv2.dilate(erosion3,kernel3,iterations = 1)
+            cropped=dilation3[20:int(.98*len(dilation3)),20:int(.98*(len(dilation3[0])))]
 
             cv2.imwrite("registered/empty/rollno"+str(k)+"/"+str(2)+".png", transformed_img)
-            cv2.imwrite("difference/empty/rollno"+str(k)+"/"+str(2)+".png", dilation3)
+            cv2.imwrite("difference/empty/rollno"+str(k)+"/"+str(2)+".png", cropped)
 
 def components():
     for j in range(1,68):
