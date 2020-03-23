@@ -115,10 +115,12 @@ def box_extractionqw(img_for_box_extraction_path):
 
     # draws boundary of contours.
                         cv2.drawContours(img3, [approx], 0, (0, 0, 255), 5)
+                        #print(len(approx[1]))
 
                         # Used to flatted the array containing
                         # the co-ordinates of the vertices.
                         nq = approx.ravel()
+                        #print(nq)
                         iq = 0
 
                         for jq in nq :
@@ -160,7 +162,59 @@ def box_extractionqw(img_for_box_extraction_path):
                         # cv2.imwrite('image2.png', img3)
 
                         coords=[extTop,extRight,extBot,extLeft]
-                        return coords
+                        #print(coords)
+                        #ignore below part and don't erase it
+                        sum0=coords[0][0]+coords[0][1]
+                        sum1=coords[1][0]+coords[1][1]
+                        sum2=coords[2][0]+coords[2][1]
+                        sum3=coords[3][0]+coords[3][1]
+                        dif0=coords[0][0]-coords[0][1]
+                        dif1=coords[1][0]-coords[1][1]
+                        dif2=coords[2][0]-coords[2][1]
+                        dif3=coords[3][0]-coords[3][1]
+                        smin=min(sum0,sum1,sum2,sum3)
+                        smax=max(sum0,sum1,sum2,sum3)
+                        dmin=min(dif0,dif1,dif2,dif3)
+                        dmax=max(dif0,dif1,dif2,dif3)
+                        if smin==sum0:
+                            tl=[coords[0][0],coords[0][1]]
+                        elif smin==sum1:
+                            tl=[coords[1][0],coords[1][1]]
+                        elif smin==sum2:
+                            tl=[coords[2][0],coords[2][1]]
+                        elif smin==sum3:
+                            tl=[coords[3][0],coords[3][1]]
+                        #print(tl)
+                        if smax==sum0:
+                            br=[coords[0][0],coords[0][1]]
+                        elif smax==sum1:
+                            br=[coords[1][0],coords[1][1]]
+                        elif smax==sum2:
+                            br=[coords[2][0],coords[2][1]]
+                        elif smax==sum3:
+                            br=[coords[3][0],coords[3][1]]
+                        #print(br)
+                        if dmin==dif0:
+                            bl=[coords[0][0],coords[0][1]]
+                        elif dmin==dif1:
+                            bl=[coords[1][0],coords[1][1]]
+                        elif dmin==dif2:
+                            bl=[coords[2][0],coords[2][1]]
+                        elif dmin==dif3:
+                            bl=[coords[3][0],coords[3][1]]
+                        #print(bl)
+                        if dmax==dif0:
+                            tr=[coords[0][0],coords[0][1]]
+                        elif dmax==dif1:
+                            tr=[coords[1][0],coords[1][1]]
+                        elif dmax==dif2:
+                            tr=[coords[2][0],coords[2][1]]
+                        elif dmax==dif3:
+                            tr=[coords[3][0],coords[3][1]]
+                        #print(tr)
+                        rect=[tl,tr,bl,br]
+
+                        return rect
 
 
                         #print (coords)
@@ -168,5 +222,5 @@ def box_extractionqw(img_for_box_extraction_path):
                         x1=x #inner
 
 
-# p=box_extractionqw("cropped/rollno3/1.png")
+# p=box_extractionqw("cropped/rollno38/2.png")
 # print(p)

@@ -236,11 +236,11 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
                     # cv2.imwrite("contour1.png", img)
                     # coords="[(189.96536, 1084.9089), (822.29297, 1050.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]"
                     # [(189.96536, 1084.9089), (852.29297, 1006.0603), (990.5377, 2167.3167), (328.2101, 2246.1653)]
-<<<<<<< HEAD
+
                 #x1=x #inner
-=======
+
                 # x1=x #inner
->>>>>>> ff7d16ee105314323e1774ee2def6b08f16db3b6
+
             # print(x)
                 # y1=y
                     x1=x  #outer
