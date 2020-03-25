@@ -104,8 +104,8 @@ def box_extractionqw(img_for_box_extraction_path):
 
             if(cv2.contourArea(c)>30000):
             # if ((x>(x1+100))): #outer
-                if (w > 400 and h > 600 and h>(1.3*w)):
-                    if ((x<(x1+50))): #inner
+                if (w > 300 and h > 400 and((h<(6*w))and(h>(0.3*w)))):
+                    if ((x<(x1+100))): #inner
                         idx += 1
 
 
@@ -162,7 +162,7 @@ def box_extractionqw(img_for_box_extraction_path):
                         # cv2.imwrite('image2.png', img3)
 
                         coords=[extTop,extRight,extBot,extLeft]
-                        #print(coords)
+                        # print(coords)
                         #ignore below part and don't erase it
                         sum0=coords[0][0]+coords[0][1]
                         sum1=coords[1][0]+coords[1][1]
@@ -217,7 +217,7 @@ def box_extractionqw(img_for_box_extraction_path):
                         return rect
 
 
-                        #print (coords)
+                        print (coords)
 
                         x1=x #inner
 
