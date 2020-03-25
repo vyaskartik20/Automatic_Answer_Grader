@@ -404,6 +404,7 @@ def components():
                 img = cv2.bitwise_not(thresh)
                 _, markers = cv2.connectedComponents(img)
                 c1ans = np.amax(markers) #total number of connected components with filled anwerkey
+                # print(c1ans)
                 cans=c1ans+cans
 
 
@@ -415,7 +416,8 @@ def components():
                 ret, thresh = cv2.threshold(dilation3, 150, 255, cv2.THRESH_BINARY_INV)
                 img = cv2.bitwise_not(thresh)
                 _, markers = cv2.connectedComponents(img)
-                c1attempted = np.amax(markers) #total number of connected components with filled anwerkey
+                c1attempted = np.amax(markers) #total number of connected components with empty OMR
+                # print(c1attempted)
                 cattempted=c1attempted+cattempted
                 # print("kartik")
 
@@ -478,7 +480,7 @@ box_extraction("data/OMR.jpg","./RUN/Cropped/OMR/")
 box_extraction("data/ANSWER_KEY.jpg","./RUN/Cropped/ANSWER_KEY/")
 
 for j in range(1,6):
-    # if j!=26 and j!=48:
+    if j!=26 and j!=48:
         box_extraction("data/image_"+str(j)+".jpg","./RUN/Cropped/ROLLNO_"+str(j)+"/")
 
 registration()
