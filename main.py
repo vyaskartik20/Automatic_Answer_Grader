@@ -315,9 +315,9 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
 #
 def registration():
-    for k in range(1,6):
+    for k in range(1,68):
         if k!=26 and k!=48:
-            for p in range(1,2):
+            for p in range(1,3):
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/ANSWER_KEY/"+str(p)+".png")
 
@@ -389,13 +389,13 @@ def registration():
 
 
 def components():
-    for j in range(1,6):
+    for j in range(1,68):
         if j!=26 and j!=48:
             cans=0
             cattempted=0
             c1ans=0
             c1attempted=0
-            for p in range(1,2):
+            for p in range(1,3):
                 inputs = cv2.imread("RUN/Difference/ROLLNO_"+ str(j) +"/Filled/" + str(p) + ".png",0)
                 kernel3 = np.ones((5,5),np.uint8)
                 erosion3 = cv2.erode(inputs,kernel3,iterations = 3)
@@ -423,7 +423,7 @@ def components():
 
 
 
-            cunattempt=40-cattempted  #total number of un attempted question
+            cunattempt=20-cattempted  #total number of un attempted question
             # c2unattempt=20-cattempted #total number of un attempted question
             wrongattempt=cans-cunattempt #total number of wrong components
             # wrong2attempt=c2ans-c2unattempt  #total number of wrong components
@@ -437,7 +437,7 @@ def components():
             # print(The marks of RollNO")
             print(cans)
             print(cattempted)
-            print("Score of roll number",j, " is ",score," out of 40")
+            print("Score of roll number",j, " is ",score," out of 20")
 
             # print(abs((count0/2)-10)+abs((count1/2)-10))
 dirname = "RUN"
@@ -456,7 +456,7 @@ os.mkdir(dirname)
 dirname="RUN/Difference"
 os.mkdir(dirname)
 
-for j in range(1,6):
+for j in range(1,68):
     dirname=("RUN/Cropped/ROLLNO_"+str(j))
     os.mkdir(dirname)
 
@@ -476,12 +476,12 @@ for j in range(1,6):
 
 
 
-box_extraction("data/OMR.jpg","./RUN/Cropped/OMR/")
-box_extraction("data/ANSWER_KEY.jpg","./RUN/Cropped/ANSWER_KEY/")
+box_extraction("set/OMR.jpg","./RUN/Cropped/OMR/")
+box_extraction("set/ANSWER_KEY.jpg","./RUN/Cropped/ANSWER_KEY/")
 
-for j in range(1,6):
+for j in range(1,68):
     if j!=26 and j!=48:
-        box_extraction("data/image_"+str(j)+".jpg","./RUN/Cropped/ROLLNO_"+str(j)+"/")
+        box_extraction("set/image_"+str(j)+".jpg","./RUN/Cropped/ROLLNO_"+str(j)+"/")
 
 registration()
 components()
