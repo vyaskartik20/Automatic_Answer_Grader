@@ -315,9 +315,9 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
 #
 def registration():
-    for k in range(1,6):
+    for k in range(1,7):
         if k!=26 and k!=48:
-            for p in range(1,2):
+            for p in range(1,4):
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/ANSWER_KEY/"+str(p)+".png")
 
@@ -389,13 +389,13 @@ def registration():
 
 
 def components():
-    for j in range(1,6):
+    for j in range(1,7):
         if j!=26 and j!=48:
             cans=0
             cattempted=0
             c1ans=0
             c1attempted=0
-            for p in range(1,2):
+            for p in range(1,4):
                 inputs = cv2.imread("RUN/Difference/ROLLNO_"+ str(j) +"/Filled/" + str(p) + ".png",0)
                 kernel3 = np.ones((5,5),np.uint8)
                 erosion3 = cv2.erode(inputs,kernel3,iterations = 3)
@@ -404,7 +404,7 @@ def components():
                 img = cv2.bitwise_not(thresh)
                 _, markers = cv2.connectedComponents(img)
                 c1ans = np.amax(markers) #total number of connected components with filled anwerkey
-                # print(c1ans)
+                print(c1ans)
                 cans=c1ans+cans
 
 
@@ -417,13 +417,13 @@ def components():
                 img = cv2.bitwise_not(thresh)
                 _, markers = cv2.connectedComponents(img)
                 c1attempted = np.amax(markers) #total number of connected components with empty OMR
-                # print(c1attempted)
+                print(c1attempted)
                 cattempted=c1attempted+cattempted
                 # print("kartik")
 
 
 
-            cunattempt=40-cattempted  #total number of un attempted question
+            cunattempt=30-cattempted  #total number of un attempted question
             # c2unattempt=20-cattempted #total number of un attempted question
             wrongattempt=cans-cunattempt #total number of wrong components
             # wrong2attempt=c2ans-c2unattempt  #total number of wrong components
@@ -456,7 +456,7 @@ os.mkdir(dirname)
 dirname="RUN/Difference"
 os.mkdir(dirname)
 
-for j in range(1,6):
+for j in range(1,7):
     dirname=("RUN/Cropped/ROLLNO_"+str(j))
     os.mkdir(dirname)
 
@@ -479,7 +479,7 @@ for j in range(1,6):
 box_extraction("data/OMR.jpg","./RUN/Cropped/OMR/")
 box_extraction("data/ANSWER_KEY.jpg","./RUN/Cropped/ANSWER_KEY/")
 
-for j in range(1,6):
+for j in range(1,7):
     if j!=26 and j!=48:
         box_extraction("data/image_"+str(j)+".jpg","./RUN/Cropped/ROLLNO_"+str(j)+"/")
 
