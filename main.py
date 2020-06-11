@@ -353,9 +353,6 @@ def registration():
                 cv2.imwrite("RUN/Difference/ROLLNO_"+ str(k) +"/Filled/" +str(p)+".png", cropped)
                 cv2.imwrite("RUN/Registered/ROLLNO_"+ str(k) +"/Filled/" +str(p)+".png", transformed_img)
 
-
-
-
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/OMR/"+str(p)+".png")
 
