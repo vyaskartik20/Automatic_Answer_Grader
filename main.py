@@ -204,6 +204,7 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
                         # hull = []
                         #
+                        
                         # # calculate points for each contour
                         #
                         # hull.append(cv2.convexHull(c, False))
