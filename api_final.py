@@ -19,7 +19,7 @@ def upload():
     dirname="SAVED"
     os.mkdir(dirname)
     images=request.files.to_dict()
-    j=0;
+    j=0
     for image in images:
         print(images[image])
         file_name = images[image].filename
@@ -69,27 +69,15 @@ def upload():
     cunattempt=list[1]
     wrong=list[2]
     score=list[3]
-    # print(int(cattempted))
-    # print(int(cunattempt))
-    # print(int(wrong))
-    # print(int(score))
-    # shutil.rmtree('RUN/Difference/ROLLNO_1/Empty')
-    # shutil.rmtree('RUN/Difference/ROLLNO_1/Filled')
-    # shutil.rmtree('RUN/Difference/ROLLNO_1')
+
     shutil.rmtree('RUN/Difference')
-    # shutil.rmtree('RUN/Registered/ROLLNO_1/Empty')
-    # shutil.rmtree('RUN/Registered/ROLLNO_1/Filled')
-    # shutil.rmtree('RUN/Registered/ROLLNO_1')
+
     shutil.rmtree('RUN/Registered')
-    # shutil.rmtree('RUN/Cropped/ROLLNO_1')
-    # shutil.rmtree('RUN/Cropped/ANSWER_KEY')
-    # shutil.rmtree('RUN/Cropped/OMR')
+  
     shutil.rmtree('RUN/Cropped')
     shutil.rmtree('RUN')
     shutil.rmtree('SAVED')
-    # os.remove('0.jpg')
-    # os.remove('1.jpg')
-    # os.remove('2.jpg')
+
     return jsonify(attempted=str(int(cattempted)),unattemped=str(int(cunattempt)),wrong=str(int(wrong)),score=str(score))
 
 def sort_contours(cnts, method="left-to-right"):
@@ -131,12 +119,13 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
     img_temp2 = cv2.erode(img_bin, hori_kernel, iterations=3)
     horizontal_lines_img = cv2.dilate(img_temp2, hori_kernel, iterations=3)
-
+   
     alpha = 0.50
     beta = 1.0 - alpha
     img_final_bin = cv2.addWeighted(verticle_lines_img, alpha, horizontal_lines_img, beta, 0.0)
     img_final_bin = cv2.erode(~img_final_bin, kernel, iterations=2)
     (thresh, img_final_bin) = cv2.threshold(img_final_bin, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+
 
     contours, hierarchy = cv2.findContours(
         img_final_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
@@ -144,27 +133,27 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
     x1=-100
     y1=0
+    # check=0
     idx = 0
     for c in contours:
-        # if check!=3:
             x, y, w, h = cv2.boundingRect(c)
-
-
-
-            # if ((x==x1)):
-
+          
             # if(cv2.contourArea(c)>50):
             if(cv2.contourArea(c)>50000):
                 if (w > 300 and h > 400 and((h<(4*w))and(h>(0.6*w))) and(x!=0)):
-                    # print("no0")
                     if ((x>(x1+100))): #outer
                     # if ((x<(x1+50))): #inner
                         idx += 1
+
+
+
                         itr=0
 
                         approx = cv2.approxPolyDP(c, 0.009 * cv2.arcLength(c, True), True)
 
+    # draws boundary of contours.
                         cv2.drawContours(img3, [approx], 0, (0, 0, 255), 5)
+
                         nq = approx.ravel()
                         iq = 0
 
@@ -191,9 +180,8 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 
                             iq = iq + 1
 
+
                         coords="[%s, %s, %s, %s]" %(extTop,extRight,extBot,extLeft)
-
-
 
                         pts = np.array(eval(coords), dtype = "float32")
 
@@ -201,15 +189,18 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
                         new_img = four_point_transform(img2,pts)
                         cv2.imwrite(cropped_dir_path+str(idx) + '.png', new_img)
                         # print(x)
-                    
+
+
 
                     # x1=x #inner
 
+                    # x1=x #inner
+
+                    # y1=y
                         x1=x  #outer
                         # y1=y
                     # print(x)
-                    # print(coords)
-                    # print(cv2.contourArea(c))
+
 
 def registration():
 
@@ -217,8 +208,6 @@ def registration():
         if k!=26 and k!=48:
             #for 3
             for p in range(1,4):
-            #for 2
-            # for p in range(1,3):
 
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/ANSWER_KEY/"+str(p)+".png")
@@ -332,9 +321,9 @@ def components():
 
 
 
-            cunattempt=30-cattempted 
-            wrongattempt=cans-cunattempt #total number of wrong components
-        
+            cunattempt=30-cattempted  
+
+            wrongattempt=cans-cunattempt 
             wrongattempt=wrongattempt/2
             score=cattempted-wrongattempt
             # print(count_1)
@@ -381,6 +370,7 @@ def four_point_transform(image, pts):
 
 	M = cv2.getPerspectiveTransform(rect, dst)
 	warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
+
 	return warped
 
 def box_extractionqw(img_for_box_extraction_path):
@@ -389,10 +379,12 @@ def box_extractionqw(img_for_box_extraction_path):
     img2 = cv2.imread(img_for_box_extraction_path, 0)
     img3 = cv2.imread(img_for_box_extraction_path, 0)
     font = cv2.FONT_HERSHEY_COMPLEX
+    # img = cv2.blur(img,(10,10))
     (thresh, img_bin) = cv2.threshold(img, 128, 255,
                                       cv2.THRESH_BINARY | cv2.THRESH_OTSU)  # Thresholding the image
-    img_bin = 255-img_bin  
+    img_bin = 255-img_bin  # Invert the image
 
+ 
     img = cv2.blur(img,(20,20))
 
     kernel_length = np.array(img).shape[1]//400
@@ -441,7 +433,7 @@ def box_extractionqw(img_for_box_extraction_path):
                         approx = cv2.approxPolyDP(c, 0.009 * cv2.arcLength(c, True), True)
 
                         cv2.drawContours(img3, [approx], 0, (0, 0, 255), 5)
-                       
+                        
                         nq = approx.ravel()
                         #print(nq)
                         iq = 0
@@ -467,11 +459,10 @@ def box_extractionqw(img_for_box_extraction_path):
                                     extLeft=[xq,yq]
 
                                 itr = itr + 1
+
                             iq = iq + 1
 
                         coords=[extTop,extRight,extBot,extLeft]
-                        # print(coords)
-                        #ignore below part and don't erase it
                         sum0=coords[0][0]+coords[0][1]
                         sum1=coords[1][0]+coords[1][1]
                         sum2=coords[2][0]+coords[2][1]
@@ -528,6 +519,9 @@ def box_extractionqw(img_for_box_extraction_path):
                         print (coords)
 
                         x1=x #inner
+
+
+
 
 if __name__ == '__main__':
 
