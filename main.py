@@ -6,7 +6,7 @@ from PIL import Image
 # from transform_example import transfer
 from pyimagesearch.transform import four_point_transform
 from connected_component import components
-from image_regg import registration
+# from image_regg import registration
 from coords import box_extractionqw
 #
 # for j in range(1,68):
@@ -327,9 +327,16 @@ def registration():
                 img1 = cv2.cvtColor(img1_color, cv2.COLOR_BGR2GRAY)
                 img2 = cv2.cvtColor(img2_color, cv2.COLOR_BGR2GRAY)
                 height, width = img2.shape
+                
+                # print ('ARE WE HERE')
 
-                p1=box_extractionqw("RUN/Cropped/ROLLNo_"+str(k) + "/" +str(p)+ ".png")
+                p1=box_extractionqw("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 p2=box_extractionqw("RUN/Cropped/ANSWER_KEY/"+str(p)+".png")
+
+                # p1
+                # p2
+                # print(p1)
+                # print(p2)
 
                 homography, mask = cv2.findHomography(np.float32(p1), np.float32(p2), cv2.RANSAC)
                 transformed_img = cv2.warpPerspective(img1_color, homography, (width, height))
@@ -353,6 +360,11 @@ def registration():
                 cropped=dilation3[20:int(.98*len(dilation3)),20:int(.98*(len(dilation3[0])))]
                 cv2.imwrite("RUN/Difference/ROLLNO_"+ str(k) +"/Filled/" +str(p)+".png", cropped)
                 cv2.imwrite("RUN/Registered/ROLLNO_"+ str(k) +"/Filled/" +str(p)+".png", transformed_img)
+                
+                
+                
+                
+                
 
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/OMR/"+str(p)+".png")
