@@ -317,9 +317,9 @@ def box_extraction(img_for_box_extraction_path, cropped_dir_path):
 #
 def registration():
 
-    for k in range(1,7):
+    for k in range(1,67):
         if k!=26 and k!=48:
-            for p in range(1,4):
+            for p in range(1,3):
 
                 img1_color = cv2.imread("RUN/Cropped/ROLLNO_"+str(k) + "/" +str(p)+ ".png")
                 img2_color = cv2.imread("RUN/Cropped/ANSWER_KEY/"+str(p)+".png")
@@ -402,7 +402,7 @@ def registration():
 
 def components():
 
-    for j in range(1,7):
+    for j in range(1,67):
 
         if j!=26 and j!=48:
             cans=0
@@ -410,7 +410,7 @@ def components():
             c1ans=0
             c1attempted=0
 
-            for p in range(1,4):
+            for p in range(1,3):
 
                 inputs = cv2.imread("RUN/Difference/ROLLNO_"+ str(j) +"/Filled/" + str(p) + ".png",0)
                 kernel3 = np.ones((5,5),np.uint8)
@@ -475,7 +475,7 @@ dirname="RUN/Difference"
 os.mkdir(dirname)
 
 
-for j in range(1,7):
+for j in range(1,67):
 
     dirname=("RUN/Cropped/ROLLNO_"+str(j))
     os.mkdir(dirname)
@@ -500,7 +500,7 @@ box_extraction("data/OMR.jpg","./RUN/Cropped/OMR/")
 box_extraction("data/ANSWER_KEY.jpg","./RUN/Cropped/ANSWER_KEY/")
 
 
-for j in range(1,7):
+for j in range(1,67):
 
     if j!=26 and j!=48:
         box_extraction("data/image_"+str(j)+".jpg","./RUN/Cropped/ROLLNO_"+str(j)+"/")
